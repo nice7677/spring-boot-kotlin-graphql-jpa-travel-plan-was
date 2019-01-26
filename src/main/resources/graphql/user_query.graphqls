@@ -1,0 +1,22 @@
+type User {
+    id: ID!
+    name: String!
+    sex: String!
+    age: Int!
+}
+
+type ExceptionObject {
+    type: String!
+    message: String!
+}
+
+type Mutation {
+    createUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): User
+    updateUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): User
+    deleteUser(id: String!, password: String!): ExceptionObject
+}
+
+extend type Query {
+    findAllUser: [User]
+    findByIdUser(id: ID!) : User
+}

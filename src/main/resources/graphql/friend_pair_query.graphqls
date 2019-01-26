@@ -1,0 +1,18 @@
+type FriendPair {
+    userId: String!
+    friend: String!
+}
+
+type ExceptionObject {
+    type: String!
+    message: String!
+}
+
+extend type Mutation {
+    addFriend(user: String!, friend: String!): ExceptionObject
+    deleteFriend(user: String!, friend: String!): ExceptionObject
+}
+
+extend type Query {
+    findAllByUserFriend(user: String!) : [FriendPair]
+}

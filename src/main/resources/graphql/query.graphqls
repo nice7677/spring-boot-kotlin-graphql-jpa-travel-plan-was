@@ -2,20 +2,3 @@ type Query {
     # API Version
     version: String!
 }
-
-type User {
-    id: ID!
-    password: String!
-    name: String!
-    sex: String!
-    age: Int!
-}
-
-type Mutation {
-    createUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): User
-}
-
-extend type Query {
-    findAllUser: [User]
-    findById(id: ID!) : User
-}

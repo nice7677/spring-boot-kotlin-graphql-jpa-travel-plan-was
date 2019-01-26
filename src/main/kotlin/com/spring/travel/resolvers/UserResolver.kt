@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 @Component
 class UserResolver(private val userService: UserService, private val userRepository: UserRepository): GraphQLQueryResolver {
 
-    fun findById(id: String) = userService.findById(id)
+    fun findByIdUser(id: String) = userService.findById(id)
 
     fun findAllUser() = userService.findAll()
 

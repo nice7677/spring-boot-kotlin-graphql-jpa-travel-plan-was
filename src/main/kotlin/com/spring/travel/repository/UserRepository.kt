@@ -10,4 +10,8 @@ interface UserRepository : JpaRepository<User, String> {
 
     override fun findById(id: String): Optional<User>
 
+    override fun deleteById(id: String)
+
+    fun findByIdAndPassword(id: String, password: String): Optional<User>
+
 }
