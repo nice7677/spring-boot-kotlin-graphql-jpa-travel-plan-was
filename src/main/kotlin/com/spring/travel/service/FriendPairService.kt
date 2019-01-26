@@ -5,8 +5,10 @@ import com.spring.travel.custom.ResultVM
 import com.spring.travel.custom.ResultVMObject
 import com.spring.travel.repository.FriendPairRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class FriendPairService(
     private val friendPairRepository: FriendPairRepository
 ) {
