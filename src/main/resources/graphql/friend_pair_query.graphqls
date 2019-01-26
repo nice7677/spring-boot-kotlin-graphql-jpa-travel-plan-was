@@ -3,13 +3,6 @@ type FriendPair {
     friend: String!
 }
 
-type ResultVMObject {
-    type: String!
-    action: String!
-    success: Boolean!
-    message: String!
-}
-
 extend type Mutation {
     addFriend(user: String!, friend: String!): ResultVMObject
     deleteFriend(user: String!, friend: String!): ResultVMObject

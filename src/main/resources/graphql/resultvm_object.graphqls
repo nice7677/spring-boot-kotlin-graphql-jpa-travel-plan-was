@@ -1,0 +1,6 @@
+type ResultVMObject {
+    type: String!
+    action: String!
+    success: Boolean!
+    message: String!
+}

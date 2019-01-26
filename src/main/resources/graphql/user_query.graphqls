@@ -5,15 +5,8 @@ type User {
     age: Int!
 }
 
-type ResultVMObject {
-    type: String!
-    action: String!
-    success: Boolean!
-    message: String!
-}
-
 type Mutation {
-    createUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): User
+    createUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): ResultVMObject
     updateUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): User
     deleteUser(id: String!, password: String!): ResultVMObject
 }

@@ -32,9 +32,16 @@ class UserService(
 
     }
 
-    fun creatUser(id: String, password: String, name: String, sex: String, age: Int): User {
-        userRepository.save(User(id = id, password = passwordEncoder.encode(password), name = name, sex = sex, age = age))
-        return User(id = id, password = passwordEncoder.encode(password), name = name, sex = sex, age = age)
+    fun creatUser(id: String, password: String, name: String, sex: String, age: Int): ResultVMObject {
+
+        if (userRepository.findById(id).isPresent) {
+            return ResultVM().failure(jobType, "Create")
+        }
+        else {
+            userRepository.save(User(id = id, password = passwordEncoder.encode(password), name = name, sex = sex, age = age))
+            return ResultVM().success(jobType, "Create")
+        }
+
     }
 
     fun updateUser(id: String, password: String, name: String, sex: String, age: Int) =
