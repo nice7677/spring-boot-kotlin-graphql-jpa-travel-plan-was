@@ -1,15 +1,16 @@
 package com.spring.travel.service
 
 import com.spring.travel.domain.User
-import com.spring.travel.exception.ExceptionHandler
-import com.spring.travel.exception.ExceptionObject
+import com.spring.travel.custom.ResultVM
+import com.spring.travel.custom.ResultVMObject
 import com.spring.travel.repository.UserRepository
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import sun.security.util.Password
 
 @Service
 class UserService(
-        private val userRepository: UserRepository
+        private val userRepository: UserRepository,
+        private val passwordEncoder: PasswordEncoder
 ) {
 
     val jobType: String = "User"
@@ -18,20 +19,33 @@ class UserService(
 
     fun findAll() = userRepository.findAll()
 
-    fun creatUser(id: String, password: String, name: String, sex: String, age: Int) =
-        userRepository.save(User(id = id, password = password, name = name, sex = sex, age = age))
+    fun login(id: String, password: String): ResultVMObject {
 
-    fun updateUser(id: String, password: String, name: String, sex: String, age: Int) =
-        userRepository.save(User(id=id, password = password, name = name, sex = sex, age = age))
-
-    fun deleteUser(id: String, password: String): ExceptionObject {
-        if (userRepository.findByIdAndPassword(id, password).isPresent) {
-            userRepository.deleteById(id)
-            return ExceptionHandler().state(jobType,"delete user","success")
+        if (passwordEncoder.matches(password, userRepository.findById(id).get().password)) {
+            return ResultVM().success(jobType, "Login")
         }
         else {
-            return ExceptionHandler().state(jobType, "delete user","failed")
+            return ResultVM().failure(jobType, "Login")
+        }
+
+    }
+
+    fun creatUser(id: String, password: String, name: String, sex: String, age: Int): User {
+        userRepository.save(User(id = id, password = passwordEncoder.encode(password), name = name, sex = sex, age = age))
+        return User(id = id, password = passwordEncoder.encode(password), name = name, sex = sex, age = age)
+    }
+
+    fun updateUser(id: String, password: String, name: String, sex: String, age: Int) =
+            userRepository.save(User(id = id, password = password, name = name, sex = sex, age = age))
+
+    fun deleteUser(id: String, password: String): ResultVMObject {
+        if (userRepository.findByIdAndPassword(id, password).isPresent) {
+            userRepository.deleteById(id)
+            return ResultVM().success(jobType, "Delete")
+        } else {
+            return ResultVM().failure(jobType, "Delete")
         }
     }
 
 }
+
