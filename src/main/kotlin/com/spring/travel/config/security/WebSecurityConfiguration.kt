@@ -1,4 +1,4 @@
-package com.spring.travel.security
+package com.spring.travel.config.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -15,8 +15,6 @@ class WebSecurityConfiguration: WebSecurityConfigurerAdapter() {
         this.http.csrf().disable()
         this.http.authorizeRequests()
                 .anyRequest().permitAll()
-                .and()
-                .formLogin().permitAll()
     }
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
