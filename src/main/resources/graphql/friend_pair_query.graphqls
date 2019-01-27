@@ -4,8 +4,8 @@ type FriendPair {
 }
 
 extend type Mutation {
-    addFriend(user: String!, friend: String!): ResultVMObject
-    deleteFriend(user: String!, friend: String!): ResultVMObject
+    addFriend(user: String!, friend: String!): ResultVM
+    deleteFriend(user: String!, friend: String!): ResultVM
 }
 
 extend type Query {

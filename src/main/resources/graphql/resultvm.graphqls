@@ -1,4 +1,4 @@
-type ResultVMObject {
+type ResultVM {
     type: String!
     action: String!
     success: Boolean!

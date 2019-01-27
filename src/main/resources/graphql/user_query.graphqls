@@ -6,13 +6,13 @@ type User {
 }
 
 type Mutation {
-    createUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): ResultVMObject
+    createUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): ResultVM
     updateUser(id: String!, password: String!, name: String!, sex: String!, age: Int!): User
-    deleteUser(id: String!, password: String!): ResultVMObject
+    deleteUser(id: String!, password: String!): ResultVM
 }
 
 extend type Query {
     findAllUser: [User]
     findByIdUser(id: ID!) : User
-    login(id: ID!, password: String!) : ResultVMObject
+    login(id: ID!, password: String!) : ResultVM
 }

@@ -1,11 +1,11 @@
-package com.spring.travel.resolvers
+package com.spring.travel.resolvers.query
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import com.spring.travel.service.UserService
 import org.springframework.stereotype.Component
 
 @Component
-class UserResolver(private val userService: UserService): GraphQLQueryResolver {
+class UserQueryResolver(private val userService: UserService): GraphQLQueryResolver {
 
     fun findByIdUser(id: String) = userService.findById(id)
 

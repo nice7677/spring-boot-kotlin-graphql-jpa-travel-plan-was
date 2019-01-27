@@ -2,7 +2,7 @@ package com.spring.travel.service
 
 import com.spring.travel.domain.User
 import com.spring.travel.custom.ResultVM
-import com.spring.travel.custom.ResultVMObject
+import com.spring.travel.custom.ResultVMHandler
 import com.spring.travel.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -21,25 +21,25 @@ class UserService(
 
     fun findAll() = userRepository.findAll()
 
-    fun login(id: String, password: String): ResultVMObject {
+    fun login(id: String, password: String): ResultVM {
 
         if (passwordEncoder.matches(password, userRepository.findById(id).get().password)) {
-            return ResultVM().success(jobType, "Login")
+            return ResultVMHandler().success(jobType, "Login")
         }
         else {
-            return ResultVM().failure(jobType, "Login")
+            return ResultVMHandler().failure(jobType, "Login")
         }
 
     }
 
-    fun creatUser(id: String, password: String, name: String, sex: String, age: Int): ResultVMObject {
+    fun creatUser(id: String, password: String, name: String, sex: String, age: Int): ResultVM {
 
         if (userRepository.findById(id).isPresent) {
-            return ResultVM().failure(jobType, "Create")
+            return ResultVMHandler().failure(jobType, "Create")
         }
         else {
             userRepository.save(User(id = id, password = passwordEncoder.encode(password), name = name, sex = sex, age = age))
-            return ResultVM().success(jobType, "Create")
+            return ResultVMHandler().success(jobType, "Create")
         }
 
     }
@@ -47,12 +47,12 @@ class UserService(
     fun updateUser(id: String, password: String, name: String, sex: String, age: Int) =
             userRepository.save(User(id = id, password = password, name = name, sex = sex, age = age))
 
-    fun deleteUser(id: String, password: String): ResultVMObject {
+    fun deleteUser(id: String, password: String): ResultVM {
         if (userRepository.findByIdAndPassword(id, password).isPresent) {
             userRepository.deleteById(id)
-            return ResultVM().success(jobType, "Delete")
+            return ResultVMHandler().success(jobType, "Delete")
         } else {
-            return ResultVM().failure(jobType, "Delete")
+            return ResultVMHandler().failure(jobType, "Delete")
         }
     }
 
