@@ -46,6 +46,7 @@ dependencies {
     compile "com.graphql-java:graphql-spring-boot-starter:$springGraphqlVersion"
     compile "com.graphql-java:graphql-java-tools:$javatoolsGraphqlVersion"
     compile group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.0'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
 }
 
 compileKotlin {

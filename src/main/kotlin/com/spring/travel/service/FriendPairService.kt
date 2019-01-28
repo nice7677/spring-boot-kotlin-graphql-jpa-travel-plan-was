@@ -1,8 +1,8 @@
 package com.spring.travel.service
 
 import com.spring.travel.domain.FriendPair
-import com.spring.travel.custom.ResultVM
-import com.spring.travel.custom.ResultVMHandler
+import com.spring.travel.custom.vm.ResultVM
+import com.spring.travel.custom.vm.ResultVMHandler
 import com.spring.travel.repository.FriendPairRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -22,9 +22,9 @@ class FriendPairService(
         try {
             friendPairRepository.save(FriendPair(0,user, friend))
             friendPairRepository.save(FriendPair(0,friend, user))
-            return ResultVMHandler().success(jobType, "Add")
+            return ResultVMHandler().success(jobType, "Add", friendPairRepository.findByUserIdAndFriend(user, friend))
         } catch (e: Exception) {
-            return ResultVMHandler().failure(jobType, "Add")
+            return ResultVMHandler().failure(jobType, "Add", null)
         }
     }
 
@@ -32,9 +32,9 @@ class FriendPairService(
         try {
             friendPairRepository.delete(friendPairRepository.findByUserIdAndFriend(user, friend))
             friendPairRepository.delete(friendPairRepository.findByUserIdAndFriend(friend, user))
-            return ResultVMHandler().success(jobType, "Delete")
+            return ResultVMHandler().success(jobType, "Delete", null)
         } catch (e: Exception) {
-            return ResultVMHandler().failure(jobType, "Delete")
+            return ResultVMHandler().failure(jobType, "Delete", null)
         }
     }
 

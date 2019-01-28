@@ -1,6 +1,9 @@
+scalar Json
+
 type ResultVM {
     type: String!
     action: String!
     success: Boolean!
     message: String!
+    responseVM: Json
 }
